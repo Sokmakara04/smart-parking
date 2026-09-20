@@ -4,7 +4,9 @@ const fs = require("node:fs/promises");
 const path = require("node:path");
 const mysql = require("mysql2/promise");
 const bcrypt = require("bcryptjs");
-require("dotenv").config();
+const dotenv = require("dotenv");
+
+dotenv.config({ path: path.resolve(__dirname, "..", ".env") });
 
 const dbConfig = {
     host: process.env.DB_HOST || "localhost",
