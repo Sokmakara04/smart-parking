@@ -1,0 +1,851 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <title>Sell Ticket - Smart Parking</title>
+
+    <link rel="stylesheet" href="../assets/css/style.css">
+
+    <link rel="stylesheet"
+          href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.7.1/css/all.min.css">
+</head>
+
+<body>
+
+<div class="container">
+
+    <!-- =====================================================
+         SIDEBAR
+    ====================================================== -->
+
+    <aside class="sidebar">
+
+        <div>
+
+            <div class="logo">
+                <i class="fa-solid fa-car"></i>
+                <h2>Smart Parking</h2>
+            </div>
+
+            <ul class="menu">
+
+                <li>
+                    <a href="../index.html">
+                        <i class="fa-solid fa-gauge"></i>
+                        Dashboard
+                    </a>
+                </li>
+
+                <li>
+                    <a href="parking-slots.html">
+                        <i class="fa-solid fa-square-parking"></i>
+                        Parking Slots
+                    </a>
+                </li>
+
+                <li class="active">
+                    <a href="sell-ticket.html" aria-current="page">
+                        <i class="fa-solid fa-cash-register"></i>
+                        Sell Ticket
+                    </a>
+                </li>
+
+                <li>
+                    <a href="customers.html">
+                        <i class="fa-solid fa-users"></i>
+                        Customers
+                    </a>
+                </li>
+
+                <li>
+                    <a href="staff.html">
+                        <i class="fa-solid fa-user-tie"></i>
+                        Staff
+                    </a>
+                </li>
+
+                <li>
+                    <a href="contracts.html">
+                        <i class="fa-solid fa-file-contract"></i>
+                        Contracts
+                    </a>
+                </li>
+
+                <li>
+                    <a href="payments.html">
+                        <i class="fa-solid fa-credit-card"></i>
+                        Payments
+                    </a>
+                </li>
+
+                <li>
+                    <a href="accounting.html">
+                        <i class="fa-solid fa-chart-line"></i>
+                        Accounting
+                    </a>
+                </li>
+
+                <li>
+                    <a href="call-center.html">
+                        <i class="fa-solid fa-headset"></i>
+                        Call Center
+                    </a>
+                </li>
+
+                <li>
+                    <a href="reports.html">
+                        <i class="fa-solid fa-chart-pie"></i>
+                        Reports
+                    </a>
+                </li>
+
+                <li>
+                    <a href="settings.html">
+                        <i class="fa-solid fa-gear"></i>
+                        Settings
+                    </a>
+                </li>
+
+            </ul>
+
+        </div>
+
+        <div class="logout">
+
+            <a href="../auth/login.html">
+                <i class="fa-solid fa-right-from-bracket"></i>
+                Logout
+            </a>
+
+        </div>
+
+    </aside>
+
+
+    <!-- =====================================================
+         MAIN
+    ====================================================== -->
+
+    <main class="main">
+
+        <!-- =================================================
+             HEADER
+        ================================================== -->
+
+        <header class="header">
+
+            <div>
+
+                <h1>Sell Ticket</h1>
+
+                <p>
+                    Create a parking ticket and collect payment
+                </p>
+
+            </div>
+
+            <div class="header-right">
+
+                <a href="payments.html"
+                   class="sell-payment-button">
+
+                    <i class="fa-solid fa-wallet"></i>
+
+                    Payment
+
+                </a>
+
+            </div>
+
+        </header>
+
+
+        <!-- =================================================
+             STATISTICS
+        ================================================== -->
+
+        <section class="sell-statistics">
+
+            <!-- Ticket Price -->
+
+            <div class="sell-stat-card">
+
+                <div>
+                    <span>Ticket Price</span>
+                    <strong>$2.00</strong>
+                </div>
+
+                <div class="sell-stat-icon">
+                    <i class="fa-solid fa-ticket"></i>
+                </div>
+
+            </div>
+
+
+            <!-- Available Slots -->
+
+            <div class="sell-stat-card">
+
+                <div>
+                    <span>Available Slots</span>
+                    <strong>124</strong>
+                </div>
+
+                <div class="sell-stat-icon">
+                    <i class="fa-solid fa-square-parking"></i>
+                </div>
+
+            </div>
+
+
+            <!-- Sold Today -->
+
+            <div class="sell-stat-card">
+
+                <div>
+                    <span>Sold Today</span>
+                    <strong>92</strong>
+                </div>
+
+                <div class="sell-stat-icon">
+                    <i class="fa-solid fa-bag-shopping"></i>
+                </div>
+
+            </div>
+
+
+            <!-- Revenue -->
+
+            <div class="sell-stat-card">
+
+                <div>
+                    <span>Today Revenue</span>
+                    <strong>$1,860</strong>
+                </div>
+
+                <div class="sell-stat-icon">
+                    <i class="fa-solid fa-circle-dollar-to-slot"></i>
+                </div>
+
+            </div>
+
+        </section>
+
+
+        <!-- =================================================
+             TICKET + VIP
+        ================================================== -->
+
+        <section class="sell-main-grid">
+
+
+            <!-- =================================================
+                 NEW TICKET SALE
+            ================================================== -->
+
+            <div class="new-ticket-box">
+
+                <div class="sell-box-header">
+
+                    <div>
+
+                        <h2>New Ticket Sale</h2>
+
+                        <p>
+                            Enter vehicle, slot, customer, and payment details
+                        </p>
+
+                    </div>
+
+                    <span class="sale-status" id="saleStatus">
+                        Ready
+                    </span>
+
+                </div>
+
+
+                <!-- FORM -->
+
+                <form id="sellTicketForm"
+                      class="new-ticket-form">
+
+
+                    <!-- Plate Number -->
+
+                    <div class="sell-field">
+
+                        <label for="plateNumber">
+                            Plate Number
+                        </label>
+
+                        <input
+                            type="text"
+                            id="plateNumber"
+                            placeholder="2AB-1234"
+                            autocomplete="off"
+                        >
+
+                    </div>
+
+
+                    <!-- Parking Slot -->
+
+                    <div class="sell-field">
+
+                        <label for="parkingSlot">
+                            Parking Slot
+                        </label>
+
+                        <select id="parkingSlot">
+
+                            <option value="">
+                                Select Slot
+                            </option>
+
+                            <option value="A-12">
+                                A-12
+                            </option>
+
+                            <option value="B-05">
+                                B-05
+                            </option>
+
+                            <option value="C-03">
+                                C-03
+                            </option>
+
+                            <option value="D-08">
+                                D-08
+                            </option>
+
+                            <option value="F1-12">
+                                F1 - 12
+                            </option>
+
+                            <option value="F1-13">
+                                F1 - 13
+                            </option>
+
+                            <option value="F1-14">
+                                F1 - 14
+                            </option>
+
+                        </select>
+
+                    </div>
+
+
+                    <!-- Ticket Type -->
+
+                    <div class="sell-field">
+
+                        <label for="ticketType">
+                            Ticket Type
+                        </label>
+
+                        <select id="ticketType">
+
+                            <option value="">
+                                Select Type
+                            </option>
+
+                            <option value="Hourly">
+                                Hourly
+                            </option>
+
+                            <option value="Daily">
+                                Daily
+                            </option>
+
+                            <option value="VIP Guest">
+                                VIP Guest
+                            </option>
+
+                            <option value="Lost Ticket">
+                                Lost Ticket
+                            </option>
+
+                        </select>
+
+                    </div>
+
+
+                    <!-- Duration -->
+
+                    <div class="sell-field">
+
+                        <label for="parkingDuration">
+                            Duration
+                        </label>
+
+                        <select id="parkingDuration">
+
+                            <option value="">
+                                Select Duration
+                            </option>
+
+                            <option value="1 Hour">
+                                1 Hour
+                            </option>
+
+                            <option value="2 Hours">
+                                2 Hours
+                            </option>
+
+                            <option value="3 Hours">
+                                3 Hours
+                            </option>
+
+                            <option value="4 Hours">
+                                4 Hours
+                            </option>
+
+                            <option value="8 Hours">
+                                8 Hours
+                            </option>
+
+                            <option value="Full Day">
+                                Full Day
+                            </option>
+
+                        </select>
+
+                    </div>
+
+
+                    <!-- Customer -->
+
+                    <div class="sell-field">
+
+                        <label for="customerName">
+                            Customer Name
+                        </label>
+
+                        <input
+                            type="text"
+                            id="customerName"
+                            placeholder="Walk-in customer"
+                        >
+
+                    </div>
+
+
+                    <!-- Phone -->
+
+                    <div class="sell-field">
+
+                        <label for="customerPhone">
+                            Phone Number
+                        </label>
+
+                        <input
+                            type="text"
+                            id="customerPhone"
+                            placeholder="096 735 6065"
+                        >
+
+                    </div>
+
+
+                    <!-- Payment -->
+
+                    <div class="sell-field">
+
+                        <label for="paymentMethod">
+                            Payment Method
+                        </label>
+
+                        <select id="paymentMethod">
+
+                            <option value="">
+                                Select Payment
+                            </option>
+
+                            <option value="Cash">
+                                Cash
+                            </option>
+
+                            <option value="Card">
+                                Card
+                            </option>
+
+                            <option value="ABA">
+                                ABA
+                            </option>
+
+                            <option value="KHQR">
+                                KHQR
+                            </option>
+
+                            <option value="Mobile Wallet">
+                                Mobile Wallet
+                            </option>
+
+                            <option value="Bank Transfer">
+                                Bank Transfer
+                            </option>
+
+                        </select>
+
+                    </div>
+
+
+                    <!-- Amount -->
+
+                    <div class="sell-field">
+
+                        <label for="ticketAmount">
+                            Amount
+                        </label>
+
+                        <input
+                            type="text"
+                            id="ticketAmount"
+                            value="$0.00"
+                            inputmode="decimal"
+                            placeholder="$0.00"
+                        >
+
+                    </div>
+
+
+                    <!-- Note -->
+
+                    <div class="sell-field sell-field-full">
+
+                        <label for="ticketNote">
+                            Note
+                        </label>
+
+                        <textarea
+                            id="ticketNote"
+                            placeholder="Optional ticket note"
+                        ></textarea>
+
+                    </div>
+
+
+                    <!-- BUTTONS -->
+
+                    <div class="sell-form-buttons">
+
+                        <button
+                            type="submit"
+                            class="sell-print-button">
+
+                            <i class="fa-solid fa-print"></i>
+
+                            Sell & Print
+
+                        </button>
+
+
+                        <button
+                            type="reset"
+                            class="sell-clear-button">
+
+                            <i class="fa-solid fa-xmark"></i>
+
+                            Clear
+
+                        </button>
+
+                    </div>
+
+                </form>
+
+            </div>
+
+
+            <!-- =================================================
+                 VIP CARD
+            ================================================== -->
+
+            <div class="vip-card-box">
+
+
+                <!-- VIP HEADER -->
+
+                <div class="vip-box-header">
+
+                    <div>
+
+                        <h2>Scan VIP Card</h2>
+
+                        <p>
+                            Scan or type a VIP card number to load
+                            customer benefits
+                        </p>
+
+                    </div>
+
+                    <i class="fa-solid fa-credit-card"></i>
+
+                </div>
+
+
+                <!-- SCANNER STATUS -->
+
+                <div class="scanner-status">
+
+                    <i class="fa-solid fa-wifi"></i>
+
+                    <span id="scanState">
+                        Scanner ready
+                    </span>
+
+                </div>
+
+
+                <!-- SCAN INPUT -->
+
+                <div class="vip-input-row">
+
+                    <input
+                        type="text"
+                        id="vipCardInput"
+                        placeholder="VIP-1001"
+                        autocomplete="off"
+                    >
+
+                    <button
+                        type="button"
+                        id="scanVipCard"
+                        class="vip-scan-button">
+
+                        <i class="fa-solid fa-magnifying-glass"></i>
+
+                        Scan
+
+                    </button>
+
+                </div>
+
+
+                <!-- VIP CUSTOMER -->
+
+                <div
+                    class="vip-customer-card"
+                    id="vipProfile"
+                >
+
+                    <div class="vip-avatar">
+
+                        <i class="fa-solid fa-crown"></i>
+
+                    </div>
+
+
+                    <div class="vip-customer-info">
+
+                        <span id="vipStatus">
+                            Waiting for card
+                        </span>
+
+                        <h3 id="vipCustomerName">
+                            Walk-in Customer
+                        </h3>
+
+                        <p id="vipPlan">
+                            No VIP plan applied
+                        </p>
+
+                        <small id="vipSlot">
+                            Scan VIP-1001, VIP-2040, or VIP-7788
+                        </small>
+
+                    </div>
+
+                </div>
+
+
+                <!-- VIP DETAILS -->
+
+                <div
+                    class="vip-details"
+                    id="vipDetails"
+                >
+
+                    <div>
+
+                        <span>
+                            Store ID
+                        </span>
+
+                        <strong id="vipStoreId">
+                            -
+                        </strong>
+
+                    </div>
+
+
+                    <div>
+
+                        <span>
+                            Card Number
+                        </span>
+
+                        <strong id="vipCardNumber">
+                            -
+                        </strong>
+
+                    </div>
+
+
+                    <div>
+
+                        <span>
+                            Vehicle
+                        </span>
+
+                        <strong id="vipVehicle">
+                            -
+                        </strong>
+
+                    </div>
+
+
+                    <div>
+
+                        <span>
+                            Membership
+                        </span>
+
+                        <strong id="vipMembership">
+                            -
+                        </strong>
+
+                    </div>
+
+
+                    <div>
+
+                        <span>
+                            Valid Until
+                        </span>
+
+                        <strong id="vipValidUntil">
+                            -
+                        </strong>
+
+                    </div>
+
+                </div>
+
+
+                <!-- VIP ACTIONS -->
+
+                <div class="vip-actions">
+
+                    <button
+                        type="button"
+                        class="vip-checkin"
+                        id="vipCheckIn">
+
+                        <i class="fa-solid fa-right-to-bracket"></i>
+
+                        Check In
+
+                    </button>
+
+                    <button
+                        type="button"
+                        class="vip-checkin"
+                        id="vipCheckOut"
+                        style="background: #d14444; border-color: #d14444;">
+
+                        <i class="fa-solid fa-right-from-bracket"></i>
+
+                        Check Out
+
+                    </button>
+
+
+                    <button
+                        type="button"
+                        class="vip-cancel"
+                        id="vipCancel">
+
+                        Cancel
+
+                    </button>
+
+                </div>
+
+            </div>
+
+        </section>
+
+
+        <!-- =================================================
+             INVOICES
+        ================================================== -->
+
+        <section class="invoices-box">
+
+            <div class="invoice-header">
+
+                <div>
+
+                    <h2>Invoices</h2>
+
+                    <p>
+                        12 customer invoices
+                    </p>
+
+                </div>
+
+                <button
+                    type="button"
+                    id="checkoutAllInvoices"
+                    class="sell-print-button"
+                    style="padding: 0.7rem 1rem; min-width: 160px;">
+
+                    <i class="fa-solid fa-right-from-bracket"></i>
+                    Check Out All
+
+                </button>
+
+            </div>
+
+
+            <div class="invoice-grid"></div>
+
+        </section>
+
+                </div>
+
+                        </span>
+
+                        <span>
+                            Hourly
+                        </span>
+
+                    </div>
+
+                </div>
+
+            </div>
+
+        </section>
+
+    </main>
+
+</div>
+
+
+<!-- =====================================================
+     EXISTING PROJECT JAVASCRIPT
+====================================================== -->
+
+<script src="../scripts/data-store.js"></script>
+<script src="../scripts/theme.js"></script>
+<script src="../scripts/sell-ticket.js"></script>
+
+
+
+</body>
+</html>

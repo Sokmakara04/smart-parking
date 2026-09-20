@@ -1,0 +1,154 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Reports - Smart Parking</title>
+
+    <link rel="stylesheet" href="../assets/css/style.css">
+    <link rel="stylesheet"
+        href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.7.1/css/all.min.css">
+</head>
+<body>
+
+    <div class="container">
+
+        <aside class="sidebar">
+            <div class="logo">
+                <i class="fa-solid fa-car"></i>
+                <h2>Smart Parking</h2>
+            </div>
+
+            <ul class="menu">
+                <li>
+                    <a href="../index.html"><i class="fa-solid fa-gauge"></i> Dashboard</a>
+                </li>
+
+                <li>
+                    <a href="parking-slots.html"><i class="fa-solid fa-square-parking"></i> Parking Slots</a>
+                </li>
+
+                <li>
+                    <a href="sell-ticket.html"><i class="fa-solid fa-cash-register"></i> Sell Ticket</a>
+                </li>
+
+                <li>
+                    <a href="customers.html"><i class="fa-solid fa-users"></i> Customers</a>
+                </li>
+
+                <li>
+                    <a href="staff.html"><i class="fa-solid fa-user-tie"></i> Staff</a>
+                </li>
+
+                <li>
+                    <a href="contracts.html"><i class="fa-solid fa-file-contract"></i> Contracts</a>
+                </li>
+
+                <li>
+                    <a href="payments.html"><i class="fa-solid fa-credit-card"></i> Payments</a>
+                </li>
+
+                <li>
+                    <a href="accounting.html"><i class="fa-solid fa-chart-line"></i> Accounting</a>
+                </li>
+
+                <li>
+                    <a href="call-center.html"><i class="fa-solid fa-headset"></i> Call Center</a>
+                </li>
+
+                <li class="active">
+                    <a href="reports.html" aria-current="page"><i class="fa-solid fa-chart-pie"></i> Reports</a>
+                </li>
+
+                <li>
+                    <a href="settings.html"><i class="fa-solid fa-gear"></i> Settings</a>
+                </li>
+            </ul>
+
+            <div class="logout">
+                <a href="../auth/login.html"><i class="fa-solid fa-right-from-bracket"></i> Logout</a>
+            </div>
+        </aside>
+
+        <main class="main">
+            <header class="header">
+                <div>
+                    <h1>Reports</h1>
+                    <p>Analyze parking performance and trends</p>
+                </div>
+
+                <div class="header-right">
+                    <button class="action-button secondary"><i class="fa-solid fa-calendar-days"></i> This Month</button>
+                    <button class="action-button"><i class="fa-solid fa-download"></i> Download</button>
+                </div>
+            </header>
+
+            <section class="cards">
+                <div class="card">
+                    <div>
+                        <h3>Occupancy Rate</h3>
+                        <h2>50.4%</h2>
+                    </div>
+                    <i class="fa-solid fa-chart-pie"></i>
+                </div>
+
+                <div class="card">
+                    <div>
+                        <h3>Revenue Growth</h3>
+                        <h2>18%</h2>
+                    </div>
+                    <i class="fa-solid fa-arrow-trend-up"></i>
+                </div>
+
+                <div class="card">
+                    <div>
+                        <h3>Peak Hour</h3>
+                        <h2>9 AM</h2>
+                    </div>
+                    <i class="fa-solid fa-clock"></i>
+                </div>
+
+                <div class="card">
+                    <div>
+                        <h3>Top Zone</h3>
+                        <h2>Zone B</h2>
+                    </div>
+                    <i class="fa-solid fa-location-dot"></i>
+                </div>
+            </section>
+
+            <section class="report-grid">
+                <div class="report-card">
+                    <h3>Daily Operations</h3>
+                    <p>Parking sessions, entry volume, and exit timing.</p>
+                    <span class="badge info">Ready</span>
+                </div>
+
+                <div class="report-card">
+                    <h3>Revenue Summary</h3>
+                    <p>Payment collections grouped by channel and period.</p>
+                    <span class="badge success">Ready</span>
+                </div>
+
+                <div class="report-card">
+                    <h3>Customer Activity</h3>
+                    <p>Visits, membership usage, and contract renewals.</p>
+                    <span class="badge warning">Updating</span>
+                </div>
+
+                <div class="report-card">
+                    <h3>Staff Performance</h3>
+                    <p>Shift coverage, ticket response, and task completion.</p>
+                    <span class="badge info">Ready</span>
+                </div>
+            </section>
+        </main>
+
+    </div>
+
+    <script src="../scripts/data-store.js"></script>
+    <script src="../scripts/theme.js"></script>
+    <script src="../scripts/reports.js"></script>
+
+</body>
+</html>

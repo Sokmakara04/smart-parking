@@ -1,0 +1,172 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Settings - Smart Parking</title>
+
+    <link rel="stylesheet" href="../assets/css/style.css">
+    <link rel="stylesheet"
+        href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.7.1/css/all.min.css">
+</head>
+<body>
+
+    <div class="container">
+
+        <aside class="sidebar">
+            <div class="logo">
+                <i class="fa-solid fa-car"></i>
+                <h2>Smart Parking</h2>
+            </div>
+
+            <ul class="menu">
+                <li>
+                    <a href="../index.html"><i class="fa-solid fa-gauge"></i> Dashboard</a>
+                </li>
+
+                <li>
+                    <a href="parking-slots.html"><i class="fa-solid fa-square-parking"></i> Parking Slots</a>
+                </li>
+
+                <li>
+                    <a href="sell-ticket.html"><i class="fa-solid fa-cash-register"></i> Sell Ticket</a>
+                </li>
+
+                <li>
+                    <a href="customers.html"><i class="fa-solid fa-users"></i> Customers</a>
+                </li>
+
+                <li>
+                    <a href="staff.html"><i class="fa-solid fa-user-tie"></i> Staff</a>
+                </li>
+
+                <li>
+                    <a href="contracts.html"><i class="fa-solid fa-file-contract"></i> Contracts</a>
+                </li>
+
+                <li>
+                    <a href="payments.html"><i class="fa-solid fa-credit-card"></i> Payments</a>
+                </li>
+
+                <li>
+                    <a href="accounting.html"><i class="fa-solid fa-chart-line"></i> Accounting</a>
+                </li>
+
+                <li>
+                    <a href="call-center.html"><i class="fa-solid fa-headset"></i> Call Center</a>
+                </li>
+
+                <li>
+                    <a href="reports.html"><i class="fa-solid fa-chart-pie"></i> Reports</a>
+                </li>
+
+                <li class="active">
+                    <a href="settings.html" aria-current="page"><i class="fa-solid fa-gear"></i> Settings</a>
+                </li>
+            </ul>
+
+            <div class="logout">
+                <a href="../auth/login.html"><i class="fa-solid fa-right-from-bracket"></i> Logout</a>
+            </div>
+        </aside>
+
+        <main class="main">
+            <header class="header">
+                <div>
+                    <h1>Settings</h1>
+                    <p>Configure system rules and preferences</p>
+                </div>
+
+                <div class="header-right">
+                    <div class="settings-header-actions">
+                        <div class="theme-switch">
+                            <span class="theme-label">Dark mode</span>
+                            <button type="button" class="theme-toggle" data-theme-toggle aria-label="Toggle dark mode">
+                                <span class="toggle-track">
+                                    <span class="toggle-thumb"></span>
+                                </span>
+                                <span class="toggle-state">Off</span>
+                            </button>
+                        </div>
+                        <button class="action-button"><i class="fa-solid fa-floppy-disk"></i> Save Changes</button>
+                    </div>
+                </div>
+            </header>
+
+            <section class="settings-grid">
+
+                <div class="settings-panel">
+                    <h3>Parking Rates</h3>
+                    <div class="setting-row">
+                        <span>Hourly Rate</span>
+                        <span class="setting-value">$2.00</span>
+                    </div>
+                    <div class="setting-row">
+                        <span>Daily Max</span>
+                        <span class="setting-value">$12.00</span>
+                    </div>
+                    <div class="setting-row">
+                        <span>Monthly Pass</span>
+                        <span class="setting-value">$85.00</span>
+                    </div>
+                </div>
+
+                <div class="settings-panel">
+                    <h3>Notifications</h3>
+                    <div class="setting-row">
+                        <span>SMS Alerts</span>
+                        <span class="setting-value">On</span>
+                    </div>
+                    <div class="setting-row">
+                        <span>Email Reports</span>
+                        <span class="setting-value">On</span>
+                    </div>
+                    <div class="setting-row">
+                        <span>Sensor Alerts</span>
+                        <span class="setting-value">On</span>
+                    </div>
+                </div>
+
+                <div class="settings-panel">
+                    <h3>Access Roles</h3>
+                    <div class="setting-row">
+                        <span>Administrators</span>
+                        <span class="setting-value">3</span>
+                    </div>
+                    <div class="setting-row">
+                        <span>Supervisors</span>
+                        <span class="setting-value">6</span>
+                    </div>
+                    <div class="setting-row">
+                        <span>Operators</span>
+                        <span class="setting-value">22</span>
+                    </div>
+                </div>
+
+                <div class="settings-panel">
+                    <h3>System</h3>
+                    <div class="setting-row">
+                        <span>Auto Backup</span>
+                        <span class="setting-value">Daily</span>
+                    </div>
+                    <div class="setting-row">
+                        <span>Currency</span>
+                        <span class="setting-value">USD</span>
+                    </div>
+                    <div class="setting-row">
+                        <span>Time Zone</span>
+                        <span class="setting-value">GMT+7</span>
+                    </div>
+                </div>
+
+            </section>
+        </main>
+
+    </div>
+
+    <script src="../scripts/data-store.js"></script>
+    <script src="../scripts/theme.js"></script>
+    <script src="../scripts/settings.js"></script>
+
+</body>
+</html>

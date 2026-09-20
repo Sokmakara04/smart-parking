@@ -1,0 +1,176 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Call Center - Smart Parking</title>
+
+    <link rel="stylesheet" href="../assets/css/style.css">
+    <link rel="stylesheet"
+        href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.7.1/css/all.min.css">
+</head>
+<body>
+
+    <div class="container">
+
+        <aside class="sidebar">
+            <div class="logo">
+                <i class="fa-solid fa-car"></i>
+                <h2>Smart Parking</h2>
+            </div>
+
+            <ul class="menu">
+                <li>
+                    <a href="../index.html"><i class="fa-solid fa-gauge"></i> Dashboard</a>
+                </li>
+
+                <li>
+                    <a href="parking-slots.html"><i class="fa-solid fa-square-parking"></i> Parking Slots</a>
+                </li>
+
+                <li>
+                    <a href="sell-ticket.html"><i class="fa-solid fa-cash-register"></i> Sell Ticket</a>
+                </li>
+
+                <li>
+                    <a href="customers.html"><i class="fa-solid fa-users"></i> Customers</a>
+                </li>
+
+                <li>
+                    <a href="staff.html"><i class="fa-solid fa-user-tie"></i> Staff</a>
+                </li>
+
+                <li>
+                    <a href="contracts.html"><i class="fa-solid fa-file-contract"></i> Contracts</a>
+                </li>
+
+                <li>
+                    <a href="payments.html"><i class="fa-solid fa-credit-card"></i> Payments</a>
+                </li>
+
+                <li>
+                    <a href="accounting.html"><i class="fa-solid fa-chart-line"></i> Accounting</a>
+                </li>
+
+                <li class="active">
+                    <a href="call-center.html" aria-current="page"><i class="fa-solid fa-headset"></i> Call Center</a>
+                </li>
+
+                <li>
+                    <a href="reports.html"><i class="fa-solid fa-chart-pie"></i> Reports</a>
+                </li>
+
+                <li>
+                    <a href="settings.html"><i class="fa-solid fa-gear"></i> Settings</a>
+                </li>
+            </ul>
+
+            <div class="logout">
+                <a href="../auth/login.html"><i class="fa-solid fa-right-from-bracket"></i> Logout</a>
+            </div>
+        </aside>
+
+        <main class="main">
+            <header class="header">
+                <div>
+                    <h1>Call Center</h1>
+                    <p>Support tickets and customer calls</p>
+                </div>
+
+                <div class="header-right">
+                    <div class="search-box">
+                        <input type="text" placeholder="Search ticket...">
+                    </div>
+
+                    <button type="button" class="action-button" id="newTicketButton"><i class="fa-solid fa-headset"></i> New Ticket</button>
+                </div>
+            </header>
+
+            <section class="cards">
+                <div class="card">
+                    <div>
+                        <h3>Open Tickets</h3>
+                        <h2>17</h2>
+                    </div>
+                    <i class="fa-solid fa-ticket"></i>
+                </div>
+
+                <div class="card">
+                    <div>
+                        <h3>Resolved Today</h3>
+                        <h2>31</h2>
+                    </div>
+                    <i class="fa-solid fa-circle-check"></i>
+                </div>
+
+                <div class="card">
+                    <div>
+                        <h3>Average Wait</h3>
+                        <h2>2m</h2>
+                    </div>
+                    <i class="fa-solid fa-stopwatch"></i>
+                </div>
+
+                <div class="card">
+                    <div>
+                        <h3>Agents Online</h3>
+                        <h2>8</h2>
+                    </div>
+                    <i class="fa-solid fa-headset"></i>
+                </div>
+            </section>
+
+            <section class="table-section">
+                <div class="table-header">
+                    <div>
+                        <h3>Support Queue</h3>
+                        <p>Latest customer requests</p>
+                    </div>
+                </div>
+
+                <table>
+                    <thead>
+                        <tr>
+                            <th>Ticket</th>
+                            <th>Customer</th>
+                            <th>Issue</th>
+                            <th>Agent</th>
+                            <th>Status</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr>
+                            <td>TCK-3091</td>
+                            <td>John Smith</td>
+                            <td>Lost parking ticket</td>
+                            <td>Rina Sok</td>
+                            <td><span class="status pending">Open</span></td>
+                        </tr>
+                        <tr>
+                            <td>TCK-3092</td>
+                            <td>Sophia Chen</td>
+                            <td>Payment confirmation</td>
+                            <td>Malis Dara</td>
+                            <td><span class="status active">Resolved</span></td>
+                        </tr>
+                        <tr>
+                            <td>TCK-3093</td>
+                            <td>Metro Delivery</td>
+                            <td>Contract renewal</td>
+                            <td>Vichea Long</td>
+                            <td><span class="status info">In Progress</span></td>
+                        </tr>
+                    </tbody>
+                </table>
+            </section>
+        </main>
+
+    </div>
+
+    <script src="../scripts/data-store.js"></script>
+    <script src="../scripts/crud-actions.js"></script>
+    <script src="../scripts/theme.js"></script>
+    <script src="../scripts/call-center.js"></script>
+
+</body>
+</html>

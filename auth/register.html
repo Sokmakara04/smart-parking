@@ -1,0 +1,142 @@
+﻿<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Register - Smart Parking</title>
+    <link rel="stylesheet" href="../assets/css/style.css">
+    <link rel="stylesheet"
+        href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.7.1/css/all.min.css">
+</head>
+<body class="login-page">
+
+    <div class="login-shell">
+        <div class="login-tok"></div>
+
+        <div class="parking-scene">
+            <div class="login-glass-panel">
+                <div class="glass-header">
+                    <div class="glass-brand">
+                        <i class="fa-solid fa-location-dot"></i>
+                        <span>GRAND HORIZON PARKING</span>
+                    </div>
+                    <span class="slot-title">REGISTER</span>
+                </div>
+
+                <form class="login-form register-form" id="registerForm" novalidate>
+                    <div class="form-message" id="registerMessage" aria-live="polite"></div>
+
+                    <label>
+                        <span>First name</span>
+                        <input id="firstName" type="text" placeholder="Enter first name" required>
+                    </label>
+
+                    <label>
+                        <span>Last name</span>
+                        <input id="lastName" type="text" placeholder="Enter last name" required>
+                    </label>
+
+                    <label>
+                        <span>Email</span>
+                        <input id="email" type="email" placeholder="admin@smartparking.com" required>
+                    </label>
+
+                    <label>
+                        <span>Password</span>
+                        <input id="password" type="password" placeholder="Enter password" required>
+                    </label>
+
+                    <label>
+                        <span>Confirm password</span>
+                        <input id="confirmPassword" type="password" placeholder="Enter confirm password" required>
+                    </label>
+
+                    <div class="login-actions">
+                        <button class="action-button" type="submit">
+                            <i class="fa-solid fa-user-plus"></i>
+                            Register
+                        </button>
+                    </div>
+
+                    <div class="auth-link-row">
+                        <a href="login.html" class="secondary-link">Already have an account? Log in</a>
+                    </div>
+                </form>
+
+                <div class="glass-footer">
+                    <span>Please Create and <a href="#">log-in</a> account !</span>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <script src="../scripts/theme.js"></script>
+
+    <script>
+        const setMessage = (element, message, isError = false) => {
+            element.textContent = message;
+            element.style.color = isError ? "#ffb4b4" : "#a7f3d0";
+            element.style.marginBottom = message ? "12px" : "0";
+            element.style.display = message ? "block" : "none";
+        };
+
+        const registerForm = document.getElementById("registerForm");
+        const registerMessage = document.getElementById("registerMessage");
+
+        registerForm.addEventListener("submit", async (event) => {
+            event.preventDefault();
+
+            const firstName = document.getElementById("firstName").value.trim();
+            const lastName = document.getElementById("lastName").value.trim();
+            const email = document.getElementById("email").value.trim().toLowerCase();
+            const password = document.getElementById("password").value;
+            const confirmPassword = document.getElementById("confirmPassword").value;
+
+            if (!firstName || !lastName) {
+                setMessage(registerMessage, "First name and last name are required.", true);
+                return;
+            }
+
+            if (!/^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(email)) {
+                setMessage(registerMessage, "Please enter a valid email address.", true);
+                return;
+            }
+
+            if (password.length < 6) {
+                setMessage(registerMessage, "Password must be at least 6 characters.", true);
+                return;
+            }
+
+            if (password !== confirmPassword) {
+                setMessage(registerMessage, "Passwords do not match.", true);
+                return;
+            }
+
+            try {
+                const response = await fetch("/api/auth/register", {
+                    method: "POST",
+                    headers: { "Content-Type": "application/json" },
+                    body: JSON.stringify({ full_name: `${firstName} ${lastName}`.trim(), email, password, username: email.split("@")[0], phone: "" })
+                });
+
+                const result = await response.json();
+
+                if (!response.ok || !result.ok) {
+                    setMessage(registerMessage, result.message || "Registration failed.", true);
+                    return;
+                }
+
+                setMessage(registerMessage, "Registration successful. Redirecting to login...", false);
+                setTimeout(() => {
+                    window.location.href = "login.html";
+                }, 600);
+            } catch (error) {
+                setMessage(registerMessage, "Unable to connect to the authentication server.", true);
+            }
+        });
+    </script>
+
+</body>
+</html>
+
+

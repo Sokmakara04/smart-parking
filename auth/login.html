@@ -1,0 +1,106 @@
+﻿<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Login - Smart Parking</title>
+    <link rel="stylesheet" href="../assets/css/style.css">
+    <link rel="stylesheet"
+        href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.7.1/css/all.min.css">
+</head>
+<body class="login-page">
+
+    <div class="login-shell">
+        <div class="login-tok"></div>
+
+        <div class="parking-scene">
+            <div class="login-glass-panel">
+                <div class="glass-header">
+                    <div class="glass-brand">
+                        <i class="fa-solid fa-location-dot"></i>
+                        <span>GRAND HORIZON PARKING</span>
+                    </div>
+                    <span class="slot-title">LOGIN</span>
+                </div>
+
+                <form class="login-form" id="loginForm" novalidate>
+                    <div class="form-message" id="loginMessage" aria-live="polite"></div>
+
+                    <label>
+                        <span>Email</span>
+                        <input id="loginEmail" type="email" placeholder="admin@smartparking.com" required>
+                    </label>
+
+                    <label>
+                        <span>Password</span>
+                        <input id="loginPassword" type="password" placeholder="Enter password" required>
+                    </label>
+
+                    <div class="login-actions">
+                        <button class="action-button" type="submit">
+                            <i class="fa-solid fa-right-to-bracket"></i>
+                            Log in
+                        </button>
+                    </div>
+
+                    <div class="auth-link-row">
+                        <a href="register.html" class="secondary-link">Create account</a>
+                    </div>
+                </form>
+
+                <div class="glass-footer">
+                    <span>Please Create and <a href="#">log-in</a> account !</span>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <script src="../scripts/theme.js"></script>
+
+    <script>
+        const setMessage = (element, message, isError = false) => {
+            element.textContent = message;
+            element.style.color = isError ? "#ffb4b4" : "#a7f3d0";
+            element.style.marginBottom = message ? "12px" : "0";
+            element.style.display = message ? "block" : "none";
+        };
+
+        const loginForm = document.getElementById("loginForm");
+        const loginMessage = document.getElementById("loginMessage");
+
+        loginForm.addEventListener("submit", async (event) => {
+            event.preventDefault();
+
+            const email = document.getElementById("loginEmail").value.trim().toLowerCase();
+            const password = document.getElementById("loginPassword").value;
+
+            if (!email || !password) {
+                setMessage(loginMessage, "Email and password are required.", true);
+                return;
+            }
+
+            try {
+                const response = await fetch("/api/auth/login", {
+                    method: "POST",
+                    headers: { "Content-Type": "application/json" },
+                    body: JSON.stringify({ email, password })
+                });
+
+                const result = await response.json();
+
+                if (!response.ok || !result.ok) {
+                    setMessage(loginMessage, result.message || "Invalid email or password.", true);
+                    return;
+                }
+
+                setMessage(loginMessage, "Login successful. Redirecting...", false);
+                window.location.href = "../index.html";
+            } catch (error) {
+                setMessage(loginMessage, "Unable to connect to the authentication server.", true);
+            }
+        });
+    </script>
+
+</body>
+</html>
+

@@ -1,0 +1,20 @@
+{
+  "name": "smart-parking",
+  "version": "1.0.0",
+  "description": "Smart Parking dashboard served by Node.js with MySQL storage.",
+  "main": "app.js",
+  "scripts": {
+    "start": "node app.js",
+    "check": "node --check app.js && node --check src/server.js && node --check src/db.js && node --check public/scripts/data-store.js && node --check public/scripts/index.js && node --check public/scripts/sell-ticket.js && node --check public/scripts/parking-slots.js && node --check public/scripts/customers.js && node --check public/scripts/staff.js && node --check public/scripts/contracts.js && node --check public/scripts/payments.js && node --check public/scripts/accounting.js && node --check public/scripts/call-center.js && node --check public/scripts/reports.js && node --check public/scripts/settings.js",
+    "db:init": "node database/init.js"
+  },
+  "engines": {
+    "node": ">=18"
+  },
+  "dependencies": {
+    "bcryptjs": "^2.4.3",
+    "dotenv": "^18.0.1",
+    "express": "^4.21.2",
+    "mysql2": "^3.24.4"
+  }
+}

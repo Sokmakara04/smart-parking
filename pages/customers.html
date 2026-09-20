@@ -1,0 +1,176 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Customers - Smart Parking</title>
+
+    <link rel="stylesheet" href="../assets/css/style.css">
+    <link rel="stylesheet"
+        href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.7.1/css/all.min.css">
+</head>
+<body>
+
+    <div class="container">
+
+        <aside class="sidebar">
+            <div class="logo">
+                <i class="fa-solid fa-car"></i>
+                <h2>Smart Parking</h2>
+            </div>
+
+            <ul class="menu">
+                <li>
+                    <a href="../index.html"><i class="fa-solid fa-gauge"></i> Dashboard</a>
+                </li>
+
+                <li>
+                    <a href="parking-slots.html"><i class="fa-solid fa-square-parking"></i> Parking Slots</a>
+                </li>
+
+                <li>
+                    <a href="sell-ticket.html"><i class="fa-solid fa-cash-register"></i> Sell Ticket</a>
+                </li>
+
+                <li class="active">
+                    <a href="customers.html" aria-current="page"><i class="fa-solid fa-users"></i> Customers</a>
+                </li>
+
+                <li>
+                    <a href="staff.html"><i class="fa-solid fa-user-tie"></i> Staff</a>
+                </li>
+
+                <li>
+                    <a href="contracts.html"><i class="fa-solid fa-file-contract"></i> Contracts</a>
+                </li>
+
+                <li>
+                    <a href="payments.html"><i class="fa-solid fa-credit-card"></i> Payments</a>
+                </li>
+
+                <li>
+                    <a href="accounting.html"><i class="fa-solid fa-chart-line"></i> Accounting</a>
+                </li>
+
+                <li>
+                    <a href="call-center.html"><i class="fa-solid fa-headset"></i> Call Center</a>
+                </li>
+
+                <li>
+                    <a href="reports.html"><i class="fa-solid fa-chart-pie"></i> Reports</a>
+                </li>
+
+                <li>
+                    <a href="settings.html"><i class="fa-solid fa-gear"></i> Settings</a>
+                </li>
+            </ul>
+
+            <div class="logout">
+                <a href="../auth/login.html"><i class="fa-solid fa-right-from-bracket"></i> Logout</a>
+            </div>
+        </aside>
+
+        <main class="main">
+            <header class="header">
+                <div>
+                    <h1>Customers</h1>
+                    <p>Manage customer profiles and vehicles</p>
+                </div>
+
+                <div class="header-right">
+                    <div class="search-box">
+                        <input type="text" placeholder="Search customer...">
+                    </div>
+
+                    <button class="action-button"><i class="fa-solid fa-user-plus"></i> Add Customer</button>
+                </div>
+            </header>
+
+            <section class="cards">
+                <div class="card">
+                    <div>
+                        <h3>Total Customers</h3>
+                        <h2>1,284</h2>
+                    </div>
+                    <i class="fa-solid fa-users"></i>
+                </div>
+
+                <div class="card">
+                    <div>
+                        <h3>Monthly Passes</h3>
+                        <h2>318</h2>
+                    </div>
+                    <i class="fa-solid fa-id-card"></i>
+                </div>
+
+                <div class="card">
+                    <div>
+                        <h3>Active Vehicles</h3>
+                        <h2>642</h2>
+                    </div>
+                    <i class="fa-solid fa-car-side"></i>
+                </div>
+
+                <div class="card">
+                    <div>
+                        <h3>New Today</h3>
+                        <h2>12</h2>
+                    </div>
+                    <i class="fa-solid fa-user-check"></i>
+                </div>
+            </section>
+
+            <section class="table-section">
+                <div class="table-header">
+                    <div>
+                        <h3>Customer List</h3>
+                        <p>Recent registered customers</p>
+                    </div>
+                </div>
+
+                <table>
+                    <thead>
+                        <tr>
+                            <th>Name</th>
+                            <th>Phone</th>
+                            <th>Plate Number</th>
+                            <th>Plan</th>
+                            <th>Status</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr>
+                            <td>John Smith</td>
+                            <td>012 345 678</td>
+                            <td>2AB-1234</td>
+                            <td>Monthly</td>
+                            <td><span class="status active">Active</span></td>
+                        </tr>
+                        <tr>
+                            <td>Sophia Chen</td>
+                            <td>010 555 824</td>
+                            <td>2EF-9999</td>
+                            <td>Daily</td>
+                            <td><span class="status pending">Pending</span></td>
+                        </tr>
+                        <tr>
+                            <td>David Kim</td>
+                            <td>096 884 221</td>
+                            <td>2CD-4321</td>
+                            <td>Weekly</td>
+                            <td><span class="status active">Active</span></td>
+                        </tr>
+                    </tbody>
+                </table>
+            </section>
+        </main>
+
+    </div>
+
+    <script src="../scripts/data-store.js"></script>
+    <script src="../scripts/crud-actions.js"></script>
+    <script src="../scripts/theme.js"></script>
+    <script src="../scripts/customers.js"></script>
+
+</body>
+</html>

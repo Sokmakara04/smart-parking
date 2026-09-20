@@ -1,0 +1,172 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Accounting - Smart Parking</title>
+
+    <link rel="stylesheet" href="../assets/css/style.css">
+    <link rel="stylesheet"
+        href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.7.1/css/all.min.css">
+</head>
+<body>
+
+    <div class="container">
+
+        <aside class="sidebar">
+            <div class="logo">
+                <i class="fa-solid fa-car"></i>
+                <h2>Smart Parking</h2>
+            </div>
+
+            <ul class="menu">
+                <li>
+                    <a href="../index.html"><i class="fa-solid fa-gauge"></i> Dashboard</a>
+                </li>
+
+                <li>
+                    <a href="parking-slots.html"><i class="fa-solid fa-square-parking"></i> Parking Slots</a>
+                </li>
+
+                <li>
+                    <a href="sell-ticket.html"><i class="fa-solid fa-cash-register"></i> Sell Ticket</a>
+                </li>
+
+                <li>
+                    <a href="customers.html"><i class="fa-solid fa-users"></i> Customers</a>
+                </li>
+
+                <li>
+                    <a href="staff.html"><i class="fa-solid fa-user-tie"></i> Staff</a>
+                </li>
+
+                <li>
+                    <a href="contracts.html"><i class="fa-solid fa-file-contract"></i> Contracts</a>
+                </li>
+
+                <li>
+                    <a href="payments.html"><i class="fa-solid fa-credit-card"></i> Payments</a>
+                </li>
+
+                <li class="active">
+                    <a href="accounting.html" aria-current="page"><i class="fa-solid fa-chart-line"></i> Accounting</a>
+                </li>
+
+                <li>
+                    <a href="call-center.html"><i class="fa-solid fa-headset"></i> Call Center</a>
+                </li>
+
+                <li>
+                    <a href="reports.html"><i class="fa-solid fa-chart-pie"></i> Reports</a>
+                </li>
+
+                <li>
+                    <a href="settings.html"><i class="fa-solid fa-gear"></i> Settings</a>
+                </li>
+            </ul>
+
+            <div class="logout">
+                <a href="../auth/login.html"><i class="fa-solid fa-right-from-bracket"></i> Logout</a>
+            </div>
+        </aside>
+
+        <main class="main">
+            <header class="header">
+                <div>
+                    <h1>Accounting</h1>
+                    <p>Track revenue, expenses, and balances</p>
+                </div>
+
+                <div class="header-right">
+                    <button class="action-button secondary"><i class="fa-solid fa-download"></i> Export</button>
+                    <button class="action-button"><i class="fa-solid fa-plus"></i> Add Entry</button>
+                </div>
+            </header>
+
+            <section class="cards">
+                <div class="card">
+                    <div>
+                        <h3>Monthly Revenue</h3>
+                        <h2>$12,450</h2>
+                    </div>
+                    <i class="fa-solid fa-arrow-trend-up"></i>
+                </div>
+
+                <div class="card">
+                    <div>
+                        <h3>Expenses</h3>
+                        <h2>$3,280</h2>
+                    </div>
+                    <i class="fa-solid fa-receipt"></i>
+                </div>
+
+                <div class="card">
+                    <div>
+                        <h3>Net Profit</h3>
+                        <h2>$9,170</h2>
+                    </div>
+                    <i class="fa-solid fa-sack-dollar"></i>
+                </div>
+
+                <div class="card">
+                    <div>
+                        <h3>Pending Payout</h3>
+                        <h2>$740</h2>
+                    </div>
+                    <i class="fa-solid fa-building-columns"></i>
+                </div>
+            </section>
+
+            <section class="table-section">
+                <div class="table-header">
+                    <div>
+                        <h3>Ledger Entries</h3>
+                        <p>Latest financial records</p>
+                    </div>
+                </div>
+
+                <table>
+                    <thead>
+                        <tr>
+                            <th>Date</th>
+                            <th>Description</th>
+                            <th>Category</th>
+                            <th>Amount</th>
+                            <th>Status</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr>
+                            <td>18 Jun 2026</td>
+                            <td>Daily parking collection</td>
+                            <td>Revenue</td>
+                            <td>$1,860</td>
+                            <td><span class="status active">Posted</span></td>
+                        </tr>
+                        <tr>
+                            <td>17 Jun 2026</td>
+                            <td>Gate sensor maintenance</td>
+                            <td>Expense</td>
+                            <td>$320</td>
+                            <td><span class="status active">Posted</span></td>
+                        </tr>
+                        <tr>
+                            <td>16 Jun 2026</td>
+                            <td>Monthly contract invoices</td>
+                            <td>Revenue</td>
+                            <td>$4,200</td>
+                            <td><span class="status pending">Review</span></td>
+                        </tr>
+                    </tbody>
+                </table>
+            </section>
+        </main>
+
+    </div>
+
+    <script src="../scripts/data-store.js"></script>
+    <script src="../scripts/theme.js"></script>
+    <script src="../scripts/accounting.js"></script>
+
+</body>
+</html>

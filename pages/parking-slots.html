@@ -1,0 +1,202 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Parking Slots - Smart Parking</title>
+
+    <link rel="stylesheet" href="../assets/css/style.css">
+    <link rel="stylesheet"
+        href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.7.1/css/all.min.css">
+</head>
+<body>
+
+    <div class="container">
+
+        <aside class="sidebar">
+            <div class="logo">
+                <i class="fa-solid fa-car"></i>
+                <h2>Smart Parking</h2>
+            </div>
+
+            <ul class="menu">
+                <li>
+                    <a href="../index.html"><i class="fa-solid fa-gauge"></i> Dashboard</a>
+                </li>
+
+                <li class="active">
+                    <a href="parking-slots.html" aria-current="page"><i class="fa-solid fa-square-parking"></i> Parking Slots</a>
+                </li>
+
+                <li>
+                    <a href="sell-ticket.html"><i class="fa-solid fa-cash-register"></i> Sell Ticket</a>
+                </li>
+
+                <li>
+                    <a href="customers.html"><i class="fa-solid fa-users"></i> Customers</a>
+                </li>
+
+                <li>
+                    <a href="staff.html"><i class="fa-solid fa-user-tie"></i> Staff</a>
+                </li>
+
+                <li>
+                    <a href="contracts.html"><i class="fa-solid fa-file-contract"></i> Contracts</a>
+                </li>
+
+                <li>
+                    <a href="payments.html"><i class="fa-solid fa-credit-card"></i> Payments</a>
+                </li>
+
+                <li>
+                    <a href="accounting.html"><i class="fa-solid fa-chart-line"></i> Accounting</a>
+                </li>
+
+                <li>
+                    <a href="call-center.html"><i class="fa-solid fa-headset"></i> Call Center</a>
+                </li>
+
+                <li>
+                    <a href="reports.html"><i class="fa-solid fa-chart-pie"></i> Reports</a>
+                </li>
+
+                <li>
+                    <a href="settings.html"><i class="fa-solid fa-gear"></i> Settings</a>
+                </li>
+            </ul>
+
+            <div class="logout">
+                <a href="../auth/login.html"><i class="fa-solid fa-right-from-bracket"></i> Logout</a>
+            </div>
+        </aside>
+
+        <main class="main">
+            <header class="header">
+                <div>
+                    <h1>Parking Slots</h1>
+                    <p>Monitor slot status by zone</p>
+                </div>
+
+                <div class="header-right">
+                    <div class="search-box">
+                        <input type="text" placeholder="Search slot...">
+                    </div>
+
+                    <button class="action-button"><i class="fa-solid fa-plus"></i> Add Slot</button>
+                </div>
+            </header>
+
+            <section class="cards">
+                <div class="card">
+                    <div>
+                        <h3>Total Slots</h3>
+                        <h2>250</h2>
+                    </div>
+                    <i class="fa-solid fa-square-parking"></i>
+                </div>
+
+                <div class="card">
+                    <div>
+                        <h3>Available</h3>
+                        <h2>124</h2>
+                    </div>
+                    <i class="fa-solid fa-circle-check"></i>
+                </div>
+
+                <div class="card">
+                    <div>
+                        <h3>Occupied</h3>
+                        <h2>126</h2>
+                    </div>
+                    <i class="fa-solid fa-car"></i>
+                </div>
+
+                <div class="card">
+                    <div>
+                        <h3>Maintenance</h3>
+                        <h2>8</h2>
+                    </div>
+                    <i class="fa-solid fa-screwdriver-wrench"></i>
+                </div>
+            </section>
+
+            <section class="slot-grid">
+                <div class="slot-card">
+                    <h3>A-01</h3>
+                    <p>Level 1 - Near entrance</p>
+                    <span class="badge success">Available</span>
+                </div>
+
+                <div class="slot-card occupied">
+                    <h3>A-02</h3>
+                    <p>Level 1 - Vehicle 2AB-1234</p>
+                    <span class="badge danger">Occupied</span>
+                </div>
+
+                <div class="slot-card reserved">
+                    <h3>B-05</h3>
+                    <p>Level 2 - Reserved customer</p>
+                    <span class="badge warning">Reserved</span>
+                </div>
+
+                <div class="slot-card maintenance">
+                    <h3>C-03</h3>
+                    <p>Level 3 - Sensor check</p>
+                    <span class="badge info">Maintenance</span>
+                </div>
+            </section>
+
+            <section class="table-section">
+                <div class="table-header">
+                    <div>
+                        <h3>Zone Overview</h3>
+                        <p>Current occupancy by parking area</p>
+                    </div>
+                </div>
+
+                <table>
+                    <thead>
+                        <tr>
+                            <th>Zone</th>
+                            <th>Total</th>
+                            <th>Available</th>
+                            <th>Occupied</th>
+                            <th>Status</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr>
+                            <td>Zone A</td>
+                            <td>80</td>
+                            <td>38</td>
+                            <td>42</td>
+                            <td><span class="status active">Open</span></td>
+                        </tr>
+                        <tr>
+                            <td>Zone B</td>
+                            <td>90</td>
+                            <td>51</td>
+                            <td>39</td>
+                            <td><span class="status active">Open</span></td>
+                        </tr>
+                        <tr>
+                            <td>Zone C</td>
+                            <td>80</td>
+                            <td>35</td>
+                            <td>45</td>
+                            <td><span class="status pending">Limited</span></td>
+                        </tr>
+                    </tbody>
+                </table>
+            </section>
+        </main>
+
+    </div>
+
+    <script src="../scripts/data-store.js"></script>
+    <script src="../scripts/crud-actions.js"></script>
+    <script src="../scripts/theme.js"></script>
+    <script src="../scripts/parking-slots.js"></script>
+
+</body>
+</html>

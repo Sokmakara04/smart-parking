@@ -1,0 +1,176 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Contracts - Smart Parking</title>
+
+    <link rel="stylesheet" href="../assets/css/style.css">
+    <link rel="stylesheet"
+        href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.7.1/css/all.min.css">
+</head>
+<body>
+
+    <div class="container">
+
+        <aside class="sidebar">
+            <div class="logo">
+                <i class="fa-solid fa-car"></i>
+                <h2>Smart Parking</h2>
+            </div>
+
+            <ul class="menu">
+                <li>
+                    <a href="../index.html"><i class="fa-solid fa-gauge"></i> Dashboard</a>
+                </li>
+
+                <li>
+                    <a href="parking-slots.html"><i class="fa-solid fa-square-parking"></i> Parking Slots</a>
+                </li>
+
+                <li>
+                    <a href="sell-ticket.html"><i class="fa-solid fa-cash-register"></i> Sell Ticket</a>
+                </li>
+
+                <li>
+                    <a href="customers.html"><i class="fa-solid fa-users"></i> Customers</a>
+                </li>
+
+                <li>
+                    <a href="staff.html"><i class="fa-solid fa-user-tie"></i> Staff</a>
+                </li>
+
+                <li class="active">
+                    <a href="contracts.html" aria-current="page"><i class="fa-solid fa-file-contract"></i> Contracts</a>
+                </li>
+
+                <li>
+                    <a href="payments.html"><i class="fa-solid fa-credit-card"></i> Payments</a>
+                </li>
+
+                <li>
+                    <a href="accounting.html"><i class="fa-solid fa-chart-line"></i> Accounting</a>
+                </li>
+
+                <li>
+                    <a href="call-center.html"><i class="fa-solid fa-headset"></i> Call Center</a>
+                </li>
+
+                <li>
+                    <a href="reports.html"><i class="fa-solid fa-chart-pie"></i> Reports</a>
+                </li>
+
+                <li>
+                    <a href="settings.html"><i class="fa-solid fa-gear"></i> Settings</a>
+                </li>
+            </ul>
+
+            <div class="logout">
+                <a href="../auth/login.html"><i class="fa-solid fa-right-from-bracket"></i> Logout</a>
+            </div>
+        </aside>
+
+        <main class="main">
+            <header class="header">
+                <div>
+                    <h1>Contracts</h1>
+                    <p>Manage long-term parking agreements</p>
+                </div>
+
+                <div class="header-right">
+                    <div class="search-box">
+                        <input type="text" placeholder="Search contract...">
+                    </div>
+
+                    <button class="action-button"><i class="fa-solid fa-file-circle-plus"></i> New Contract</button>
+                </div>
+            </header>
+
+            <section class="cards">
+                <div class="card">
+                    <div>
+                        <h3>Active Contracts</h3>
+                        <h2>142</h2>
+                    </div>
+                    <i class="fa-solid fa-file-signature"></i>
+                </div>
+
+                <div class="card">
+                    <div>
+                        <h3>Expiring Soon</h3>
+                        <h2>9</h2>
+                    </div>
+                    <i class="fa-solid fa-clock"></i>
+                </div>
+
+                <div class="card">
+                    <div>
+                        <h3>Monthly Value</h3>
+                        <h2>$8,940</h2>
+                    </div>
+                    <i class="fa-solid fa-sack-dollar"></i>
+                </div>
+
+                <div class="card">
+                    <div>
+                        <h3>Pending Approval</h3>
+                        <h2>5</h2>
+                    </div>
+                    <i class="fa-solid fa-hourglass-half"></i>
+                </div>
+            </section>
+
+            <section class="table-section">
+                <div class="table-header">
+                    <div>
+                        <h3>Contract Records</h3>
+                        <p>Latest customer agreements</p>
+                    </div>
+                </div>
+
+                <table>
+                    <thead>
+                        <tr>
+                            <th>Contract ID</th>
+                            <th>Customer</th>
+                            <th>Slot</th>
+                            <th>End Date</th>
+                            <th>Status</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr>
+                            <td>CTR-2026-014</td>
+                            <td>John Smith</td>
+                            <td>A-12</td>
+                            <td>30 Jun 2026</td>
+                            <td><span class="status active">Active</span></td>
+                        </tr>
+                        <tr>
+                            <td>CTR-2026-018</td>
+                            <td>Metro Delivery</td>
+                            <td>B-10</td>
+                            <td>22 Jun 2026</td>
+                            <td><span class="status pending">Expiring</span></td>
+                        </tr>
+                        <tr>
+                            <td>CTR-2026-021</td>
+                            <td>Sophia Chen</td>
+                            <td>C-04</td>
+                            <td>15 Jul 2026</td>
+                            <td><span class="status active">Active</span></td>
+                        </tr>
+                    </tbody>
+                </table>
+            </section>
+        </main>
+
+    </div>
+
+    <script src="../scripts/data-store.js"></script>
+    <script src="../scripts/crud-actions.js"></script>
+    <script src="../scripts/theme.js"></script>
+    <script src="../scripts/contracts.js"></script>
+
+</body>
+</html>

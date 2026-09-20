@@ -1,0 +1,848 @@
+﻿<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <title>Smart Parking Dashboard</title>
+
+    <!-- Main CSS -->
+    <link rel="stylesheet" href="assets/css/style.css">
+
+    <!-- Font Awesome -->
+    <link rel="stylesheet"
+        href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.7.1/css/all.min.css">
+
+    <!-- Chart.js -->
+    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+</head>
+
+<body>
+
+    <div class="container">
+
+        <!-- =====================================================
+             SIDEBAR
+        ====================================================== -->
+
+        <aside class="sidebar">
+
+            <!-- Logo -->
+            <div class="logo">
+
+                <i class="fa-solid fa-car"></i>
+
+                <h2>Smart Parking</h2>
+
+            </div>
+
+
+            <!-- Navigation Menu -->
+            <ul class="menu">
+
+                <li class="active">
+                    <a href="index.html" aria-current="page">
+                        <i class="fa-solid fa-gauge"></i>
+                        Dashboard
+                    </a>
+                </li>
+
+
+                <li>
+                    <a href="pages/parking-slots.html">
+                        <i class="fa-solid fa-square-parking"></i>
+                        Parking Slots
+                    </a>
+                </li>
+
+
+                <li>
+                    <a href="pages/sell-ticket.html">
+                        <i class="fa-solid fa-cash-register"></i>
+                        Sell Ticket
+                    </a>
+                </li>
+
+
+                <li>
+                    <a href="pages/customers.html">
+                        <i class="fa-solid fa-users"></i>
+                        Customers
+                    </a>
+                </li>
+
+
+                <li>
+                    <a href="pages/staff.html">
+                        <i class="fa-solid fa-user-tie"></i>
+                        Staff
+                    </a>
+                </li>
+
+
+                <li>
+                    <a href="pages/contracts.html">
+                        <i class="fa-solid fa-file-contract"></i>
+                        Contracts
+                    </a>
+                </li>
+
+
+                <li>
+                    <a href="pages/payments.html">
+                        <i class="fa-solid fa-credit-card"></i>
+                        Payments
+                    </a>
+                </li>
+
+
+                <li>
+                    <a href="pages/accounting.html">
+                        <i class="fa-solid fa-chart-line"></i>
+                        Accounting
+                    </a>
+                </li>
+
+
+                <li>
+                    <a href="pages/call-center.html">
+                        <i class="fa-solid fa-headset"></i>
+                        Call Center
+                    </a>
+                </li>
+
+
+                <li>
+                    <a href="pages/reports.html">
+                        <i class="fa-solid fa-chart-pie"></i>
+                        Reports
+                    </a>
+                </li>
+
+
+                <li>
+                    <a href="pages/settings.html">
+                        <i class="fa-solid fa-gear"></i>
+                        Settings
+                    </a>
+                </li>
+
+            </ul>
+
+
+            <!-- Logout -->
+            <div class="logout">
+
+                <a href="auth/login.html">
+
+                    <i class="fa-solid fa-right-from-bracket"></i>
+
+                    Logout
+
+                </a>
+
+            </div>
+
+        </aside>
+
+
+        <!-- =====================================================
+             MAIN CONTENT
+        ====================================================== -->
+
+        <main class="main">
+
+
+            <!-- =================================================
+                 HEADER
+            ================================================== -->
+
+            <header class="header">
+
+                <!-- Page Title -->
+                <div>
+
+                    <h1>Dashboard</h1>
+
+                    <p>
+                        Welcome back, Administrator
+                    </p>
+
+                </div>
+
+
+                <!-- Header Right -->
+                <div class="header-right">
+
+                    <!-- Search -->
+                    <div class="search-box">
+
+                        <input
+                            type="text"
+                            placeholder="Search..."
+                        >
+
+                    </div>
+
+
+                    <!-- Notification -->
+                    <button class="notification">
+
+                        <i class="fa-solid fa-bell"></i>
+
+                    </button>
+
+
+                    <!-- Profile -->
+                    <div class="profile">
+
+                        <img
+                            src="https://i.pravatar.cc/50"
+                            alt="Admin"
+                        >
+
+                        <span>
+                            Admin
+                        </span>
+
+                    </div>
+
+                </div>
+
+            </header>
+
+
+            <!-- =================================================
+                 STATISTICS CARDS
+            ================================================== -->
+
+            <section class="cards">
+
+
+                <!-- Total Slots -->
+                <div class="card">
+
+                    <div>
+
+                        <h3>
+                            Total Slots
+                        </h3>
+
+                        <h2>
+                            250
+                        </h2>
+
+                    </div>
+
+                    <i class="fa-solid fa-square-parking"></i>
+
+                </div>
+
+
+                <!-- Available -->
+                <div class="card">
+
+                    <div>
+
+                        <h3>
+                            Available
+                        </h3>
+
+                        <h2>
+                            124
+                        </h2>
+
+                    </div>
+
+                    <i class="fa-solid fa-circle-check"></i>
+
+                </div>
+
+
+                <!-- Occupied -->
+                <div class="card">
+
+                    <div>
+
+                        <h3>
+                            Occupied
+                        </h3>
+
+                        <h2>
+                            126
+                        </h2>
+
+                    </div>
+
+                    <i class="fa-solid fa-car"></i>
+
+                </div>
+
+
+                <!-- Revenue -->
+                <div class="card">
+
+                    <div>
+
+                        <h3>
+                            Revenue
+                        </h3>
+
+                        <h2>
+                            $12,450
+                        </h2>
+
+                    </div>
+
+                    <i class="fa-solid fa-dollar-sign"></i>
+
+                </div>
+
+            </section>
+
+
+            <!-- =================================================
+                 FLOOR OCCUPANCY + RECENT ALERTS
+            ================================================== -->
+
+            <section class="parking-overview">
+
+
+                <!-- =============================================
+                     FLOOR OCCUPANCY
+                ============================================== -->
+
+                <div class="occupancy-section">
+
+
+                    <!-- Section Header -->
+                    <div class="occupancy-header">
+
+                        <h2>
+                            Floor Occupancy
+                        </h2>
+
+
+                        <!-- Legend -->
+                        <div class="occupancy-legend">
+
+                            <span>
+
+                                <i class="legend-dot available-dot"></i>
+
+                                Available
+
+                            </span>
+
+
+                            <span>
+
+                                <i class="legend-dot occupied-dot"></i>
+
+                                Occupied
+
+                            </span>
+
+                        </div>
+
+                    </div>
+
+
+                    <!-- Floor Cards -->
+                    <div class="floor-grid">
+
+
+                        <!-- Ground Floor -->
+                        <div class="floor-card">
+
+                            <div
+                                class="occupancy-chart available-chart chart-72"
+                            >
+                                <span>
+                                    72%
+                                </span>
+                            </div>
+
+                            <h4>
+                                Ground Floor
+                            </h4>
+
+                            <p class="available-text">
+                                152/210 Slots
+                            </p>
+
+                        </div>
+
+
+                        <!-- Floor 1 -->
+                        <div class="floor-card">
+
+                            <div
+                                class="occupancy-chart occupied-chart chart-88"
+                            >
+                                <span>
+                                    88%
+                                </span>
+                            </div>
+
+                            <h4>
+                                Floor 1
+                            </h4>
+
+                            <p class="occupied-text">
+                                184/210 Slots
+                            </p>
+
+                        </div>
+
+
+                        <!-- Floor 2 -->
+                        <div class="floor-card">
+
+                            <div
+                                class="occupancy-chart available-chart chart-51"
+                            >
+                                <span>
+                                    51%
+                                </span>
+                            </div>
+
+                            <h4>
+                                Floor 2
+                            </h4>
+
+                            <p class="available-text">
+                                107/210 Slots
+                            </p>
+
+                        </div>
+
+
+                        <!-- Floor 3 -->
+                        <div class="floor-card">
+
+                            <div
+                                class="occupancy-chart available-chart chart-34"
+                            >
+                                <span>
+                                    34%
+                                </span>
+                            </div>
+
+                            <h4>
+                                Floor 3
+                            </h4>
+
+                            <p class="available-text">
+                                71/210 Slots
+                            </p>
+
+                        </div>
+
+
+                        <!-- Floor 4 -->
+                        <div class="floor-card">
+
+                            <div
+                                class="occupancy-chart occupied-chart chart-83"
+                            >
+                                <span>
+                                    83%
+                                </span>
+                            </div>
+
+                            <h4>
+                                Floor 4
+                            </h4>
+
+                            <p class="occupied-text">
+                                174/210 Slots
+                            </p>
+
+                        </div>
+
+
+                        <!-- Floor 5 -->
+                        <div class="floor-card">
+
+                            <div
+                                class="occupancy-chart available-chart chart-24"
+                            >
+                                <span>
+                                    24%
+                                </span>
+                            </div>
+
+                            <h4>
+                                Floor 5
+                            </h4>
+
+                            <p class="available-text">
+                                50/210 Slots
+                            </p>
+
+                        </div>
+
+                    </div>
+
+                </div>
+
+
+                <!-- =============================================
+                     RECENT ALERTS
+                ============================================== -->
+
+                <div class="alerts-section">
+
+
+                    <h2>
+                        Recent Alerts
+                    </h2>
+
+
+                    <div class="alerts-container">
+
+
+                        <!-- Security Alert -->
+                        <div class="alert-card security-alert">
+
+                            <div class="alert-top">
+
+                                <strong>
+                                    SECURITY ALERT
+                                </strong>
+
+                                <span>
+                                    Oct 24, 14:28
+                                </span>
+
+                            </div>
+
+
+                            <h4>
+                                Unrecognized vehicle entry
+                            </h4>
+
+
+                            <p>
+                                Gate B, License: UNKN-912
+                            </p>
+
+                        </div>
+
+
+                        <!-- Valet Action -->
+                        <div class="alert-card">
+
+                            <div class="alert-top">
+
+                                <strong>
+                                    VALET ACTION
+                                </strong>
+
+                                <span>
+                                    Oct 24, 14:18
+                                </span>
+
+                            </div>
+
+
+                            <h4>
+                                Space G-102 Occupied
+                            </h4>
+
+
+                            <p>
+                                Mercedes S-Class, Room 402.
+                            </p>
+
+                        </div>
+
+
+                        <!-- System Info -->
+                        <div class="alert-card">
+
+                            <div class="alert-top">
+
+                                <strong>
+                                    SYSTEM INFO
+                                </strong>
+
+                                <span>
+                                    Oct 24, 13:45
+                                </span>
+
+                            </div>
+
+
+                            <h4>
+                                Floor 4 Lighting Optimized
+                            </h4>
+
+
+                            <p>
+                                IoT energy saving active.
+                            </p>
+
+                        </div>
+
+
+                        <!-- View Activity -->
+                        <button
+                            class="activity-button"
+                            onclick="viewActivity()"
+                        >
+                            VIEW ALL ACTIVITY
+                        </button>
+
+                    </div>
+
+                </div>
+
+            </section>
+
+
+            <!-- =================================================
+                 CHARTS
+            ================================================== -->
+
+            <section class="charts">
+
+
+                <!-- Monthly Revenue -->
+                <div class="chart-box">
+
+                    <h3>
+                        Monthly Revenue
+                    </h3>
+
+                    <canvas id="revenueChart"></canvas>
+
+                </div>
+
+
+                <!-- Parking Status -->
+                <div class="chart-box">
+
+                    <h3>
+                        Parking Status
+                    </h3>
+
+                    <canvas id="slotChart"></canvas>
+
+                </div>
+
+            </section>
+
+
+            <!-- =================================================
+                 RECENT PARKING ACTIVITY
+            ================================================== -->
+
+            <section class="table-section">
+
+
+                <!-- Table Header -->
+                <div class="table-header">
+
+                    <h3>
+                        Recent Parking Activity
+                    </h3>
+
+                </div>
+
+
+                <!-- Table -->
+                <table>
+
+                    <thead>
+
+                        <tr>
+
+                            <th>
+                                Plate Number
+                            </th>
+
+                            <th>
+                                Customer
+                            </th>
+
+                            <th>
+                                Slot
+                            </th>
+
+                            <th>
+                                Check In
+                            </th>
+
+                            <th>
+                                Status
+                            </th>
+
+                        </tr>
+
+                    </thead>
+
+
+                    <tbody>
+
+
+                        <!-- Row 1 -->
+                        <tr>
+
+                            <td>
+                                2AB-1234
+                            </td>
+
+                            <td>
+                                John Smith
+                            </td>
+
+                            <td>
+                                A-12
+                            </td>
+
+                            <td>
+                                08:30 AM
+                            </td>
+
+                            <td>
+
+                                <span class="status active">
+                                    Parked
+                                </span>
+
+                            </td>
+
+                        </tr>
+
+
+                        <!-- Row 2 -->
+                        <tr>
+
+                            <td>
+                                2CD-4321
+                            </td>
+
+                            <td>
+                                David
+                            </td>
+
+                            <td>
+                                B-05
+                            </td>
+
+                            <td>
+                                09:15 AM
+                            </td>
+
+                            <td>
+
+                                <span class="status active">
+                                    Parked
+                                </span>
+
+                            </td>
+
+                        </tr>
+
+
+                        <!-- Row 3 -->
+                        <tr>
+
+                            <td>
+                                2EF-9999
+                            </td>
+
+                            <td>
+                                Sophia
+                            </td>
+
+                            <td>
+                                C-03
+                            </td>
+
+                            <td>
+                                10:20 AM
+                            </td>
+
+                            <td>
+
+                                <span class="status pending">
+                                    Leaving
+                                </span>
+
+                            </td>
+
+                        </tr>
+
+                    </tbody>
+
+                </table>
+
+            </section>
+
+
+        </main>
+
+    </div>
+
+
+    <!-- =========================================================
+         JAVASCRIPT
+    ========================================================== -->
+
+    <script>
+        const ensureSession = async () => {
+            try {
+                const response = await fetch("/api/session", { credentials: "same-origin" });
+                if (!response.ok) {
+                    window.location.href = "auth/login.html";
+                    return;
+                }
+            } catch (error) {
+                window.location.href = "auth/login.html";
+            }
+        };
+
+        const logoutLink = document.querySelector(".logout a");
+        if (logoutLink) {
+            logoutLink.addEventListener("click", async (event) => {
+                event.preventDefault();
+                try {
+                    await fetch("/api/auth/logout", {
+                        method: "POST",
+                        credentials: "same-origin"
+                    });
+                } catch (error) {
+                    console.warn("Logout request failed", error);
+                }
+                window.location.href = "auth/login.html";
+            });
+        }
+
+        ensureSession();
+    </script>
+
+    <script src="scripts/data-store.js"></script>
+
+    <script src="scripts/theme.js"></script>
+
+    <script src="scripts/index.js"></script>
+
+
+    <script>
+
+        function viewActivity() {
+
+            alert("Opening all activity...");
+
+        }
+
+    </script>
+
+</body>
+
+</html>
+

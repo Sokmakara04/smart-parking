@@ -1,0 +1,176 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Payments - Smart Parking</title>
+
+    <link rel="stylesheet" href="../assets/css/style.css">
+    <link rel="stylesheet"
+        href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.7.1/css/all.min.css">
+</head>
+<body>
+
+    <div class="container">
+
+        <aside class="sidebar">
+            <div class="logo">
+                <i class="fa-solid fa-car"></i>
+                <h2>Smart Parking</h2>
+            </div>
+
+            <ul class="menu">
+                <li>
+                    <a href="../index.html"><i class="fa-solid fa-gauge"></i> Dashboard</a>
+                </li>
+
+                <li>
+                    <a href="parking-slots.html"><i class="fa-solid fa-square-parking"></i> Parking Slots</a>
+                </li>
+
+                <li>
+                    <a href="sell-ticket.html"><i class="fa-solid fa-cash-register"></i> Sell Ticket</a>
+                </li>
+
+                <li>
+                    <a href="customers.html"><i class="fa-solid fa-users"></i> Customers</a>
+                </li>
+
+                <li>
+                    <a href="staff.html"><i class="fa-solid fa-user-tie"></i> Staff</a>
+                </li>
+
+                <li>
+                    <a href="contracts.html"><i class="fa-solid fa-file-contract"></i> Contracts</a>
+                </li>
+
+                <li class="active">
+                    <a href="payments.html" aria-current="page"><i class="fa-solid fa-credit-card"></i> Payments</a>
+                </li>
+
+                <li>
+                    <a href="accounting.html"><i class="fa-solid fa-chart-line"></i> Accounting</a>
+                </li>
+
+                <li>
+                    <a href="call-center.html"><i class="fa-solid fa-headset"></i> Call Center</a>
+                </li>
+
+                <li>
+                    <a href="reports.html"><i class="fa-solid fa-chart-pie"></i> Reports</a>
+                </li>
+
+                <li>
+                    <a href="settings.html"><i class="fa-solid fa-gear"></i> Settings</a>
+                </li>
+            </ul>
+
+            <div class="logout">
+                <a href="../auth/login.html"><i class="fa-solid fa-right-from-bracket"></i> Logout</a>
+            </div>
+        </aside>
+
+        <main class="main">
+            <header class="header">
+                <div>
+                    <h1>Payments</h1>
+                    <p>Review collections and pending invoices</p>
+                </div>
+
+                <div class="header-right">
+                    <div class="search-box">
+                        <input type="text" placeholder="Search payment...">
+                    </div>
+
+                    <button class="action-button"><i class="fa-solid fa-cash-register"></i> Record Payment</button>
+                </div>
+            </header>
+
+            <section class="cards">
+                <div class="card">
+                    <div>
+                        <h3>Today Collected</h3>
+                        <h2>$1,860</h2>
+                    </div>
+                    <i class="fa-solid fa-money-bill-wave"></i>
+                </div>
+
+                <div class="card">
+                    <div>
+                        <h3>Unpaid Invoices</h3>
+                        <h2>23</h2>
+                    </div>
+                    <i class="fa-solid fa-file-invoice-dollar"></i>
+                </div>
+
+                <div class="card">
+                    <div>
+                        <h3>Online Payments</h3>
+                        <h2>76%</h2>
+                    </div>
+                    <i class="fa-solid fa-credit-card"></i>
+                </div>
+
+                <div class="card">
+                    <div>
+                        <h3>Refunds</h3>
+                        <h2>$120</h2>
+                    </div>
+                    <i class="fa-solid fa-rotate-left"></i>
+                </div>
+            </section>
+
+            <section class="table-section">
+                <div class="table-header">
+                    <div>
+                        <h3>Payment History</h3>
+                        <p>Latest parking transactions</p>
+                    </div>
+                </div>
+
+                <table>
+                    <thead>
+                        <tr>
+                            <th>Invoice</th>
+                            <th>Customer</th>
+                            <th>Amount</th>
+                            <th>Method</th>
+                            <th>Status</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr>
+                            <td>INV-1045</td>
+                            <td>John Smith</td>
+                            <td>$25.00</td>
+                            <td>Card</td>
+                            <td><span class="status active">Paid</span></td>
+                        </tr>
+                        <tr>
+                            <td>INV-1046</td>
+                            <td>David Kim</td>
+                            <td>$12.00</td>
+                            <td>Cash</td>
+                            <td><span class="status active">Paid</span></td>
+                        </tr>
+                        <tr>
+                            <td>INV-1047</td>
+                            <td>Sophia Chen</td>
+                            <td>$40.00</td>
+                            <td>Bank Transfer</td>
+                            <td><span class="status pending">Pending</span></td>
+                        </tr>
+                    </tbody>
+                </table>
+            </section>
+        </main>
+
+    </div>
+
+    <script src="../scripts/data-store.js"></script>
+    <script src="../scripts/crud-actions.js"></script>
+    <script src="../scripts/theme.js"></script>
+    <script src="../scripts/payments.js"></script>
+
+</body>
+</html>
