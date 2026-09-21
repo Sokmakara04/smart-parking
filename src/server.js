@@ -8,7 +8,9 @@ const { connect, initializeDatabase } = require("./db");
 
 const app = express();
 const rootDir = path.resolve(__dirname, "..");
-const sessions = new Map();
+const SESSION_SECRET = process.env.SESSION_SECRET || (process.env.VERCEL === "1" ? "" : "local-development-secret-change-me");
+const sessionCookieName = "session_token";
+let databaseInitializationPromise = null;
 const defaultPort = Number(process.env.PORT) || 3000;
 
 app.disable("x-powered-by");
@@ -52,28 +54,89 @@ const parseCookies = (cookieHeader = "") => {
     return cookies;
 };
 
+const toBase64Url = (value) => Buffer.from(value).toString("base64url");
+const fromBase64Url = (value) => Buffer.from(value, "base64url").toString("utf8");
+
+const signSession = (payload) => {
+    if (!SESSION_SECRET) {
+        throw new Error("SESSION_SECRET must be configured in production.");
+    }
+    return crypto.createHmac("sha256", SESSION_SECRET).update(payload).digest("base64url");
+};
+
 const createSession = (user) => {
-    const token = crypto.randomBytes(32).toString("hex");
-    sessions.set(token, {
+    const session = {
         userId: user.user_id || user.id,
         email: user.email,
         role: user.role || "admin",
-        fullName: user.full_name || `${user.first_name || ""} ${user.last_name || ""}`.trim()
-    });
-    return token;
+        fullName: user.full_name || `${user.first_name || ""} ${user.last_name || ""}`.trim(),
+        exp: Math.floor(Date.now() / 1000) + 86400
+    };
+    const payload = toBase64Url(JSON.stringify(session));
+    return `${payload}.${signSession(payload)}`;
+};
+
+const readSession = (token) => {
+    if (!token || !SESSION_SECRET) {
+        return null;
+    }
+
+    const [payload, signature] = token.split(".");
+    if (!payload || !signature) {
+        return null;
+    }
+
+    const expected = signSession(payload);
+    const signatureBuffer = Buffer.from(signature);
+    const expectedBuffer = Buffer.from(expected);
+    if (signatureBuffer.length !== expectedBuffer.length || !crypto.timingSafeEqual(signatureBuffer, expectedBuffer)) {
+        return null;
+    }
+
+    try {
+        const session = JSON.parse(fromBase64Url(payload));
+        if (!session.exp || session.exp < Math.floor(Date.now() / 1000)) {
+            return null;
+        }
+        return session;
+    } catch {
+        return null;
+    }
 };
 
 const requireSession = (req, res, next) => {
-    const token = parseCookies(req.headers.cookie || "").session_token;
-    const session = token ? sessions.get(token) : null;
+    const token = parseCookies(req.headers.cookie || "")[sessionCookieName];
+    const session = readSession(token);
 
     if (!session) {
+        if (req.path.startsWith("/api/")) {
+            return res.status(401).json(errorPayload("Authentication required."));
+        }
         return res.redirect("/auth/login.html");
     }
 
     req.user = session;
     next();
 };
+
+const ensureDatabaseForVercel = async (req, res, next) => {
+    if (!req.path.startsWith("/api")) {
+        return next();
+    }
+
+    try {
+        if (!databaseInitializationPromise) {
+            databaseInitializationPromise = initializeDatabase();
+        }
+        await databaseInitializationPromise;
+        next();
+    } catch (error) {
+        databaseInitializationPromise = null;
+        next(error);
+    }
+};
+
+app.use(ensureDatabaseForVercel);
 
 const getUserPasswordHash = (user) => {
     if (!user) {
@@ -779,7 +842,11 @@ app.get("/auth/register.html", (req, res) => {
 app.get("/pages/:page", requireSession, (req, res) => {
     res.sendFile(path.join(rootDir, "pages", req.params.page));
 });
-app.use(express.static(rootDir));
+
+app.use("/assets", express.static(path.join(rootDir, "assets")));
+app.use("/scripts", express.static(path.join(rootDir, "scripts")));
+app.use("/auth", express.static(path.join(rootDir, "auth")));
+app.use("/pages", express.static(path.join(rootDir, "pages")));
 
 app.get("/api/data", async (req, res, next) => {
     try {
@@ -867,7 +934,7 @@ const authLogin = async (req, res, next) => {
         }
 
         const token = createSession(user);
-        res.setHeader("Set-Cookie", `session_token=${token}; Path=/; HttpOnly; SameSite=Lax; Max-Age=86400`);
+        res.setHeader("Set-Cookie", `${sessionCookieName}=${token}; Path=/; HttpOnly; SameSite=Lax; Max-Age=86400${process.env.VERCEL === "1" ? "; Secure" : ""}`);
         sendSuccess(res, { id: user.user_id, email: user.email, full_name: user.full_name, role: user.role }, {
             user: { id: user.user_id, email: user.email, full_name: user.full_name, role: user.role },
             message: "Login successful."
@@ -878,11 +945,7 @@ const authLogin = async (req, res, next) => {
 };
 
 const authLogout = (req, res) => {
-    const token = parseCookies(req.headers.cookie || "").session_token;
-    if (token) {
-        sessions.delete(token);
-    }
-    res.setHeader("Set-Cookie", "session_token=; Path=/; Expires=Thu, 01 Jan 1970 00:00:00 GMT");
+    res.setHeader("Set-Cookie", `${sessionCookieName}=; Path=/; HttpOnly; SameSite=Lax; Max-Age=0${process.env.VERCEL === "1" ? "; Secure" : ""}`);
     sendSuccess(res, null, { message: "Logged out successfully." });
 };
 
@@ -894,13 +957,16 @@ app.post("/api/logout", authLogout);
 app.post("/api/auth/logout", authLogout);
 
 app.get("/api/session", (req, res) => {
-    const token = parseCookies(req.headers.cookie || "").session_token;
-    const session = token ? sessions.get(token) : null;
+    const token = parseCookies(req.headers.cookie || "")[sessionCookieName];
+    const session = readSession(token);
     if (!session) {
         return res.status(401).json(errorPayload("No active session."));
     }
     sendSuccess(res, session, { user: session });
 });
+
+// All remaining API endpoints require an authenticated user.
+app.use("/api", requireSession);
 
 registerCrud({
     pathName: "parking_slots",
@@ -1818,6 +1884,18 @@ app.get("/api/accounting/export", async (req, res, next) => {
     } catch (error) {
         next(error);
     }
+});
+
+app.use((req, res) => {
+    if (req.path.startsWith("/api/")) {
+        return res.status(404).json(errorPayload("API route not found."));
+    }
+
+    if (req.path === "/") {
+        return res.sendFile(path.join(rootDir, "index.html"));
+    }
+
+    return res.status(404).send("Not Found");
 });
 
 app.use((error, req, res, next) => {

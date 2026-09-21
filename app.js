@@ -1,6 +1,10 @@
 "use strict";
 
-const { startServer } = require("./src/server");
+const { app, startServer } = require("./src/server");
 
-const port = Number(process.env.PORT) || 3000;
-startServer(port);
+if (require.main === module) {
+    const port = Number(process.env.PORT) || 3000;
+    startServer(port);
+}
+
+module.exports = app;

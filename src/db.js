@@ -8,18 +8,46 @@ const dotenv = require("dotenv");
 
 dotenv.config({ path: path.resolve(__dirname, "..", ".env") });
 
-const dbConfig = {
-    host: process.env.DB_HOST || "localhost",
-    port: Number(process.env.DB_PORT) || 3306,
-    user: process.env.DB_USER || "root",
-    password: process.env.DB_PASSWORD || "",
-    database: process.env.DB_NAME || "smart_parking",
-    waitForConnections: true,
-    connectionLimit: 10,
-    queueLimit: 0,
-    multipleStatements: true,
-    charset: "utf8mb4"
+const isProduction = (process.env.NODE_ENV || "").toLowerCase() === "production" || process.env.VERCEL === "1";
+
+const getEnvValue = (key, fallback = "") => {
+    const value = process.env[key];
+    if (typeof value === "string" && value.trim() !== "") {
+        return value.trim();
+    }
+    return fallback;
 };
+
+const buildDbConfig = () => {
+    const host = getEnvValue("DB_HOST", isProduction ? "" : "127.0.0.1");
+    const port = Number(getEnvValue("DB_PORT", "3306"));
+    const user = getEnvValue("DB_USER", isProduction ? "" : "root");
+    const password = getEnvValue("DB_PASSWORD", "");
+    const database = getEnvValue("DB_NAME", "smart_parking");
+
+    if (isProduction && (!host || /localhost|127\.0\.0\.1/i.test(host))) {
+        throw new Error("Production DB_HOST must be set to a non-local MySQL host.");
+    }
+
+    if (!host || !user || !database) {
+        throw new Error("Missing required MySQL environment variables: DB_HOST, DB_USER, and DB_NAME. Fill them in .env before running the app.");
+    }
+
+    return {
+        host,
+        port,
+        user,
+        password,
+        database,
+        waitForConnections: true,
+        connectionLimit: 10,
+        queueLimit: 0,
+        multipleStatements: true,
+        charset: "utf8mb4"
+    };
+};
+
+const dbConfig = buildDbConfig();
 
 let pool = null;
 
@@ -345,27 +373,36 @@ const ensureCompatibility = async (connection) => {
 };
 
 const initializeDatabase = async () => {
+    const shouldCreateDatabase = String(process.env.DB_CREATE_DATABASE || "").toLowerCase() === "true";
     const adminConnection = await mysql.createConnection({
         host: dbConfig.host,
         port: dbConfig.port,
         user: dbConfig.user,
         password: dbConfig.password,
+        database: dbConfig.database,
         multipleStatements: true
     });
 
     try {
-        await adminConnection.query(`CREATE DATABASE IF NOT EXISTS \`${dbConfig.database}\``);
-        await adminConnection.query(`USE \`${dbConfig.database}\``);
+        if (shouldCreateDatabase) {
+            await adminConnection.query(`CREATE DATABASE IF NOT EXISTS \`${dbConfig.database}\``);
+            await adminConnection.query(`USE \`${dbConfig.database}\``);
+        }
 
         const tables = await getExistingTables(adminConnection);
         if (tables.length === 0) {
-            const schemaPath = path.join(__dirname, "database", "smart_parking.sql");
+            const schemaPath = path.join(__dirname, "..", "database", "smart_parking.sql");
             const schemaSql = await fs.readFile(schemaPath, "utf8");
             await adminConnection.query(schemaSql);
         }
 
         await ensureCompatibility(adminConnection);
         return true;
+    } catch (error) {
+        if (error && error.code === "ER_BAD_DB_ERROR" && !shouldCreateDatabase) {
+            throw new Error("The configured database does not exist. Create it in your MySQL provider or set DB_CREATE_DATABASE=true for local setup.");
+        }
+        throw error;
     } finally {
         await adminConnection.end();
     }

@@ -1,4 +1,13 @@
 node_modules/
 npm-debug.log*
-server.err
-server.log
+*.log
+.env
+.env.*
+!.env.example
+.vscode/
+.idea/
+dist/
+build/
+coverage/
+
+.git/
