@@ -2,10 +2,12 @@
   "version": 2,
   "functions": {
     "api/index.js": {
-      "maxDuration": 30
+      "maxDuration": 30,
+      "includeFiles": "database/**,node_modules/sql.js/dist/**"
     },
     "api/[...path].js": {
-      "maxDuration": 30
+      "maxDuration": 30,
+      "includeFiles": "database/**,node_modules/sql.js/dist/**"
     }
   }
 }

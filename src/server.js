@@ -8,7 +8,7 @@ const { connect, initializeDatabase } = require("./db");
 
 const app = express();
 const rootDir = path.resolve(__dirname, "..");
-const SESSION_SECRET = process.env.SESSION_SECRET || (process.env.VERCEL === "1" ? "" : "local-development-secret-change-me");
+const SESSION_SECRET = process.env.SESSION_SECRET || "smart-parking-session-secret-fallback-key-2026";
 const sessionCookieName = "session_token";
 let databaseInitializationPromise = null;
 const defaultPort = Number(process.env.PORT) || 3000;
@@ -1914,7 +1914,7 @@ app.use((error, req, res, next) => {
 const startServer = async (port = defaultPort, attempts = 10) => {
     try {
         await initializeDatabase();
-        console.log("MySQL connected successfully");
+        console.log("Database connected successfully");
     } catch (error) {
         console.error("MySQL connection error:", error.message);
         process.exit(1);

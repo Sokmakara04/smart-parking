@@ -18,20 +18,31 @@ const getEnvValue = (key, fallback = "") => {
     return fallback;
 };
 
+const { connectSqlite, initializeSqliteDatabase, sqlitePool } = require("./sqlite-db");
+
+let activeDriver = (process.env.DB_PROVIDER || "").toLowerCase() === "sqlite" ? "sqlite" : null;
+let pool = null;
+
+const hasValidMySqlConfig = () => {
+    const host = getEnvValue("DB_HOST", isProduction ? "" : "127.0.0.1");
+    const user = getEnvValue("DB_USER", isProduction ? "" : "root");
+    const database = getEnvValue("DB_NAME", isProduction ? "" : "smart_parking");
+
+    if (!host || !user || !database) {
+        return false;
+    }
+    if (isProduction && /localhost|127\.0\.0\.1/i.test(host)) {
+        return false;
+    }
+    return true;
+};
+
 const buildDbConfig = () => {
     const host = getEnvValue("DB_HOST", isProduction ? "" : "127.0.0.1");
     const port = Number(getEnvValue("DB_PORT", "3306"));
     const user = getEnvValue("DB_USER", isProduction ? "" : "root");
     const password = getEnvValue("DB_PASSWORD", "");
     const database = getEnvValue("DB_NAME", "smart_parking");
-
-    if (isProduction && (!host || /localhost|127\.0\.0\.1/i.test(host))) {
-        throw new Error("Production DB_HOST must be set to a non-local MySQL host.");
-    }
-
-    if (!host || !user || !database) {
-        throw new Error("Missing required MySQL environment variables: DB_HOST, DB_USER, and DB_NAME. Fill them in .env before running the app.");
-    }
 
     return {
         host,
@@ -47,22 +58,45 @@ const buildDbConfig = () => {
     };
 };
 
-const dbConfig = buildDbConfig();
-
-let pool = null;
+const dbConfig = (() => {
+    try {
+        return buildDbConfig();
+    } catch {
+        return {};
+    }
+})();
 
 const connect = async () => {
+    if (activeDriver === "sqlite" || (process.env.DB_PROVIDER || "").toLowerCase() === "sqlite") {
+        activeDriver = "sqlite";
+        return connectSqlite();
+    }
+
     if (pool) {
         return pool;
     }
 
-    pool = mysql.createPool(dbConfig);
-    const [rows] = await pool.query("SELECT 1 AS ok");
-    if (!rows.length) {
-        throw new Error("MySQL connection test failed.");
+    if (!hasValidMySqlConfig()) {
+        console.log("ℹ️  MySQL not configured for this environment. Using SQLite database.");
+        activeDriver = "sqlite";
+        return connectSqlite();
     }
 
-    return pool;
+    try {
+        const config = buildDbConfig();
+        const testPool = mysql.createPool({ ...config, connectTimeout: 2000 });
+        const [rows] = await testPool.query("SELECT 1 AS ok");
+        if (!rows.length) {
+            throw new Error("MySQL connection test failed.");
+        }
+        pool = testPool;
+        activeDriver = "mysql";
+        return pool;
+    } catch (err) {
+        console.log("ℹ️  MySQL connection failed (" + (err.code || err.message) + "). Using SQLite database.");
+        activeDriver = "sqlite";
+        return connectSqlite();
+    }
 };
 
 const getExistingTables = async (connection) => {
@@ -373,20 +407,28 @@ const ensureCompatibility = async (connection) => {
 };
 
 const initializeDatabase = async () => {
-    const shouldCreateDatabase = String(process.env.DB_CREATE_DATABASE || "").toLowerCase() === "true";
-    const adminConnection = await mysql.createConnection({
-        host: dbConfig.host,
-        port: dbConfig.port,
-        user: dbConfig.user,
-        password: dbConfig.password,
-        database: dbConfig.database,
-        multipleStatements: true
-    });
+    if (activeDriver === "sqlite" || (process.env.DB_PROVIDER || "").toLowerCase() === "sqlite" || !hasValidMySqlConfig()) {
+        activeDriver = "sqlite";
+        return initializeSqliteDatabase();
+    }
 
+    let adminConnection = null;
     try {
+        const config = buildDbConfig();
+        const shouldCreateDatabase = String(process.env.DB_CREATE_DATABASE || "").toLowerCase() === "true";
+        adminConnection = await mysql.createConnection({
+            host: config.host,
+            port: config.port,
+            user: config.user,
+            password: config.password,
+            database: config.database,
+            multipleStatements: true,
+            connectTimeout: 2000
+        });
+
         if (shouldCreateDatabase) {
-            await adminConnection.query(`CREATE DATABASE IF NOT EXISTS \`${dbConfig.database}\``);
-            await adminConnection.query(`USE \`${dbConfig.database}\``);
+            await adminConnection.query(`CREATE DATABASE IF NOT EXISTS \`${config.database}\``);
+            await adminConnection.query(`USE \`${config.database}\``);
         }
 
         const tables = await getExistingTables(adminConnection);
@@ -397,14 +439,18 @@ const initializeDatabase = async () => {
         }
 
         await ensureCompatibility(adminConnection);
+        activeDriver = "mysql";
         return true;
     } catch (error) {
-        if (error && error.code === "ER_BAD_DB_ERROR" && !shouldCreateDatabase) {
-            throw new Error("The configured database does not exist. Create it in your MySQL provider or set DB_CREATE_DATABASE=true for local setup.");
-        }
-        throw error;
+        console.log("ℹ️  MySQL unavailable (" + (error.code || error.message) + "). Falling back to local SQLite database.");
+        activeDriver = "sqlite";
+        return initializeSqliteDatabase();
     } finally {
-        await adminConnection.end();
+        if (adminConnection) {
+            try {
+                await adminConnection.end();
+            } catch {}
+        }
     }
 };
 
