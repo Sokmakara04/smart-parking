@@ -1,11 +1,13 @@
 {
   "version": 2,
+  "rewrites": [
+    {
+      "source": "/api/(.*)",
+      "destination": "/api"
+    }
+  ],
   "functions": {
     "api/index.js": {
-      "maxDuration": 30,
-      "includeFiles": "database/**,node_modules/sql.js/dist/**"
-    },
-    "api/[...path].js": {
       "maxDuration": 30,
       "includeFiles": "database/**,node_modules/sql.js/dist/**"
     }
